@@ -29,12 +29,18 @@ virtualenv env
 pip install --no-cache-dir -r requirements.txt
 
 pushd /tmp
-yumdownloader -x \*i686 --archlist=x86_64 clamav clamav-lib clamav-update json-c pcre2
+yumdownloader -x \*i686 --archlist=x86_64 clamav clamav-lib clamav-update json-c pcre2 libprelude gnutls libtasn1 lib64nettle nettle libtool-ltdl
 rpm2cpio pcre2*.rpm | cpio -idmv
 rpm2cpio json-c*.rpm | cpio -idmv
 rpm2cpio clamav-0*.rpm | cpio -idmv
 rpm2cpio clamav-lib*.rpm | cpio -idmv
 rpm2cpio clamav-update*.rpm | cpio -idmv
+rpm2cpio gnutls*.rpm | cpio -idmv
+rpm2cpio nettle*.rpm | cpio -idmv
+rpm2cpio libprelude*.rpm | cpio -idmv
+rpm2cpio libtasn1*.rpm | cpio -idmv
+rpm2cpio libtool-ltdl*.rpm | cpio -idmv
+
 popd
 mkdir -p bin
 cp /tmp/usr/bin/clamscan /tmp/usr/bin/freshclam /tmp/usr/lib64/* bin/.
